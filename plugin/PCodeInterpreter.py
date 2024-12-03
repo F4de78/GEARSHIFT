@@ -572,7 +572,7 @@ def get_highfunction(func):
 
 def checkFixParameters(func, parameters):
 	hf = get_highfunction(func)
-	HighFunctionDBUtil.commitParamsToDatabase(hf, True, SourceType.DEFAULT)
+	HighFunctionDBUtil.commitParamsToDatabase(hf, True, HighFunctionDBUtil.ReturnCommitOption.COMMIT, SourceType.DEFAULT)
 	# reload cache
 	del highfunction_cache[func]
 	hf = get_highfunction(func)
@@ -609,7 +609,7 @@ def analyzeFunctionBackward(func, pci, init_param=None):
 	print("Backwards analysis", func.getName())
 
 	hf = get_highfunction(func)
-	HighFunctionDBUtil.commitParamsToDatabase(hf, True, SourceType.DEFAULT)
+	HighFunctionDBUtil.commitParamsToDatabase(hf, True, HighFunctionDBUtil.ReturnCommitOption.COMMIT, SourceType.DEFAULT)
 
 	func_proto = hf.getLocalSymbolMap()
 	# Grab return varnodes
@@ -651,7 +651,7 @@ def traverseForward(cur, depth, pci, visited):
 def analyzeFunctionForward(func, pci):
 	print("Forwards analysis", func.getName())
 	hf = get_highfunction(func)
-	HighFunctionDBUtil.commitParamsToDatabase(hf, True, SourceType.DEFAULT)
+	HighFunctionDBUtil.commitParamsToDatabase(hf, True, HighFunctionDBUtil.ReturnCommitOption.COMMIT, SourceType.DEFAULT)
 	print(func.getParameters())
 
 	# get the varnode of function parameters
